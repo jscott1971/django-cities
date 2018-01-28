@@ -1,5 +1,3 @@
-from ..conf import *
-
 code_map = {
     'AB': '01',
     'BC': '02',
@@ -16,9 +14,10 @@ code_map = {
     'NU': '14',
 }
 
+
 class Plugin:
-    def postal_code_pre(self, parser, items):
-        country_code = items[0]
-        if country_code != 'CA': return
-        items[4] = code_map[items[4]]
-        
+    def postal_code_pre(self, parser, item):
+        country_code = item['countryCode']
+        if country_code != 'CA':
+            return
+        item['admin1Code'] = code_map[item['admin1Code']]
